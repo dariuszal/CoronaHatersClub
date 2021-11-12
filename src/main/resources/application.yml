@@ -1,0 +1,16 @@
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+spring:
+  jpa:
+    database: MYSQL
+    show-sql: true
+    propertes:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/chc
+    username: root
+    password: codeacademy
+    driverClassName: com.mysql.jdbc.Driver
