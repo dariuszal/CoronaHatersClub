@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Spring Boot & Thymeleaf File Upload</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{styles/styles.css}">
-    <title>Our Company</title>
 </head>
-
 <body>
 <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
     <div class="container-fluid">
@@ -24,8 +22,7 @@
                     <a class="nav-link" th:href="@{/}">Link</a>
                 </li>
             </ul>
-            <img id="profile-img" class="rounded-circle" th:src="${#authentication.getPrincipal().getProfileImage()}" alt="">
-            <ul class="navbar-nav me-5">
+            <img id="profile-img" class="rounded-circle" th:src="${#authentication.getPrincipal().getProfileImage()}"><ul class="navbar-nav me-5">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
@@ -41,6 +38,25 @@
         </div>
     </div>
 </nav>
+
+<section class="my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h2>Upload File Example</h2>
+                <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
+                <form method="post" th:action="@{/userdetails/upload}" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="file" name="file" class="form-control-file">
+                    </div>
+                    <button type="submit" class="btn btn-primary my-1">Upload File</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
 </body>
+<script th:src="@{styles/userDetails.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
 </html>

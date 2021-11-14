@@ -19,17 +19,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v*/**","/styles/**").permitAll()
+                .antMatchers(
+                        "/user/**",
+                        "/api/v*/**",
+                        "/styles/**",
+                        "/images/**",
+                        "/register",
+                        "/static/uploads/images/profile/**",
+                        "/index"
+                ).permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .defaultSuccessUrl("/",true)
                 .permitAll()
                 .and()
                 .logout()

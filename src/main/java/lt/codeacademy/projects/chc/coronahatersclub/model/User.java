@@ -9,6 +9,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -34,16 +39,37 @@ public class User implements UserDetails {
     private UserRole role;
 
     @ManyToMany(mappedBy = "users")
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
+
+    private ZonedDateTime dateCreated;
+
+    //personal info
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private String country;
+    private String address;
+
+    @Column(length = 40)
+    private String title;
+
+    @Column(length =250)
+    private String aboutMe;
+
+    //path
+    private String profileImage;
+
+    private LocalDate birthdate;
 
     private Boolean locked = false;
-    private Boolean enabledx = false;
+    private Boolean enabled = false;
 
     public User(String username, String password, String email,UserRole role) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
+        this.dateCreated = LocalDateTime.now().atZone(ZoneId.of("UTC"));
     }
 
     @Override
@@ -70,6 +96,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }

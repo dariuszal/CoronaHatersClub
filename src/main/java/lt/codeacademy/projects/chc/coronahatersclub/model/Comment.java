@@ -24,9 +24,9 @@ public class Comment {
 
     @ManyToMany
     @JoinTable(name = "user_comments",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "comment_id"))
-    private List<User> users;
+            joinColumns = @JoinColumn(name = "comment_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> users = new ArrayList<>();
     private String body;
     private LocalDate date;
 
@@ -34,6 +34,5 @@ public class Comment {
         this.post = post;
         this.body = body;
         this.date = LocalDate.now();
-        this.users = new ArrayList<>();
     }
 }

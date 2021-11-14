@@ -3,6 +3,10 @@ server:
     include-message: always
     include-binding-errors: always
 spring:
+  web:
+    resources:
+      static-locations[1]: classpath:/static/
+      static-locations[0]: file:src/main/resources/static/
   jpa:
     database: MYSQL
     show-sql: true
