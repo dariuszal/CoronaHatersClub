@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,5 +12,18 @@
 <h1>
     TESTER
 </h1>
+
+<div sec:authorize="isAuthenticated()">
+    Welcome, <span sec:authentication="name">Username</span>
+
+
+    <span sec:authorize="hasAuthority('USER')"></span>
+
+    <div sec:authentication="name"></div>
+
+    <div sec:authentication="principal.authorities"></div>
+
+
+</div>
 </body>
 </html>

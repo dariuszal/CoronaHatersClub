@@ -5,7 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @Entity
 @Setter
@@ -21,13 +23,13 @@ public class Post {
     private User user;
     private String title;
     private String body;
-    private LocalDate date;
+    private ZonedDateTime created;
 
     public Post(User user, String title, String body) {
         this.user = user;
         this.title = title;
         this.body = body;
-        this.date = LocalDate.now();
+        LocalDateTime.now().atZone(ZoneId.of("UTC"));
     }
 
     @Override
@@ -37,7 +39,7 @@ public class Post {
                 ", user=" + user +
                 ", title='" + title + '\'' +
                 ", body='" + body + '\'' +
-                ", date=" + date +
+                ", created=" + created +
                 '}';
     }
 }

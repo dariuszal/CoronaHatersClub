@@ -4,16 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"/>
+    <!-- MDB -->
+    <link rel="stylesheet" th:href="@{/styles/MDB5/css/mdb.min.css}" />
+    <link rel="stylesheet" th:href="@{/styles/styles.css}">
     <title>Registration successful</title>
 </head>
 <body>
+<div th:replace="fragments/header :: header">
+    <!--Header from fragments/header-->
+</div>
 <h1>
     You have successfully registered!
 </h1>
 <h3>
     You are now being redirected to login page. Please wait!
 </h3>
+<div th:replace="fragments/footer :: 'footer1'">
+
+</div>
 </body>
+<script type="text/javascript" th:src="@{/styles/MDB5/js/mdb.min.js}"></script>
 <script th:src="@{styles/registerSuccess.js}"></script>
 
 </html>

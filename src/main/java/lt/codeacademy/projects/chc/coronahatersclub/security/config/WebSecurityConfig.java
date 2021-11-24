@@ -26,21 +26,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(
-                        "/user/**",
                         "/api/v*/**",
                         "/styles/**",
                         "/images/**",
                         "/register",
-                        "/static/uploads/images/profile/**",
-                        "/index"
+                        "/uploads/images/profile/**",
+                        "/index",
+                        "/hello/**",
+                        "/"
+
                 ).permitAll()
-                .anyRequest()
-                .authenticated()
+                .antMatchers("/tester/").hasAuthority("USER")
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/",true)
-                .permitAll()
+                .defaultSuccessUrl("/", true)
                 .and()
                 .logout()
                 .invalidateHttpSession(true)
@@ -49,10 +50,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login")
                 .permitAll();
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
+
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -60,6 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setUserDetailsService(userService);
         return provider;
     }
+
 
 }
 
@@ -78,3 +82,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 //                .logoutSuccessUrl("login").permitAll();
 //    }
+

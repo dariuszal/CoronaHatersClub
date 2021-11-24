@@ -1,0 +1,19 @@
+.left-column {
+    height: 300px;
+    background: lightseagreen;
+}
+.middle-column {
+    height: 300px;
+    background: lightseagreen;
+}
+.right-column {
+    height: 300px;
+    background: lightseagreen;
+}
+
+.col-example {
+    border: 2px solid #eee;
+    padding: 10px;
+    background-color: #33b5e5;
+    color: #fff;
+}

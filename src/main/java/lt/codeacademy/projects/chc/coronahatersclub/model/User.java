@@ -1,45 +1,50 @@
 package lt.codeacademy.projects.chc.coronahatersclub.model;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lt.codeacademy.projects.chc.coronahatersclub.enums.UserRole;
+import lt.codeacademy.projects.chc.coronahatersclub.validation.ValidUsername;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 @Entity
 @Setter
 @Getter
-@NoArgsConstructor
+@ToString
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true)
+    @NotEmpty(message = "{NotEmpty.custom}")
+    @ValidUsername
     private String username;
 
+    @NotNull
     private String password;
 
     @Column(unique = true)
+
+    @Email
+    @NotNull
     private String email;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
-
-    @ManyToMany(mappedBy = "users")
-    private List<Comment> comments = new ArrayList<>();
 
     private ZonedDateTime dateCreated;
 
@@ -49,6 +54,8 @@ public class User implements UserDetails {
     private String phoneNumber;
     private String country;
     private String address;
+    private LocalDate birthdate;
+
 
     @Column(length = 40)
     private String title;
@@ -59,7 +66,6 @@ public class User implements UserDetails {
     //path
     private String profileImage;
 
-    private LocalDate birthdate;
 
     private Boolean locked = false;
     private Boolean enabled = false;
@@ -69,6 +75,10 @@ public class User implements UserDetails {
         this.password = password;
         this.email = email;
         this.role = role;
+        this.dateCreated = LocalDateTime.now().atZone(ZoneId.of("UTC"));
+    }
+
+    public User() {
         this.dateCreated = LocalDateTime.now().atZone(ZoneId.of("UTC"));
     }
 

@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<!-- Modal -->
+<div th:fragment="modal(modalid)" class="modal fade" th:id="'modal'+*{modalid}" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-div">
+        <!-- All content inside this div is replaced with specific modal innerText -->
+        <div class="modal-dialog">
+
+        </div>
+    </div>
+</div>
+</body>

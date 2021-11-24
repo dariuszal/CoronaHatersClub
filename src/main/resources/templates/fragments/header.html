@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div th:fragment="header" class="my-2 mx-3 shadow">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" th:href="@{/}"><img th:src="@{/images/covid.png}" width="30" height="30">Corona
+                    Haters Club</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!--Collapse wrapper -->
+                <div class="collapse navbar-collapse" id="navbarsExample02">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/}">Link</a>
+                        </li>
+                    </ul>
+                    <div sec:authorize="!isAuthenticated()" class="d-flex align-items-center fs-6">
+                        <a href="/login"><button class="btn btn-link px-3 me-2 ripple-surface" type="button">LOGIN</button></a>
+                        <a href="/register"><button class="btn btn-primary me-3 ripple-surface" type="button">SING UP FOR FREE</button></a>
+                        <div th:replace="fragments/languages :: languages">
+                            </div>
+                    </div>
+                    <ul sec:authorize="isAuthenticated()" class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false"><img id="profile-img"
+                                    class="rounded-circle" th:src="${#authentication.getPrincipal().getProfileImage()}" onerror="this.onerror=null; this.src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" style="padding: 0;"
+                                aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" th:href="@{/user/profile}">Profile</a></li>
+                                <li><a class="dropdown-item" th:href="@{/user/profile/posts}">My Posts</a></li>
+                                <li><a class="dropdown-item" th:href="@{/posts/new}">New Post</a></li>
+                                <hr class="mt-0 mb-0">
+                                <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+                            </ul>
+                        </li>
+                        <div th:replace="fragments/languages :: languages">
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+</body>
+
+</html>

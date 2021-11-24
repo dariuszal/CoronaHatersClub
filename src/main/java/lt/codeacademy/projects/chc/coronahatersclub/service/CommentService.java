@@ -8,7 +8,10 @@ import lt.codeacademy.projects.chc.coronahatersclub.repository.CommentRepository
 import lt.codeacademy.projects.chc.coronahatersclub.repository.PostRepository;
 import lt.codeacademy.projects.chc.coronahatersclub.repository.UserRepository;
 import lt.codeacademy.projects.chc.coronahatersclub.requests.CommentRequest;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -25,8 +28,13 @@ public class CommentService {
                 post,
                 request.getBody()
         );
-        comment.getUsers().add(user);
+        comment.setUser(user);
         commentRepository.save(comment);
         return "new comment generated";
+    }
+
+    public List<Comment> getAllUserComments(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        return commentRepository.findAllByUser(user);
     }
 }

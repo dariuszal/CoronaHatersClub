@@ -8,8 +8,6 @@ public class CoronaHatersClubApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CoronaHatersClubApplication.class, args);
-        String userDir = System.getProperty("user.dir");
-
     }
 
 
