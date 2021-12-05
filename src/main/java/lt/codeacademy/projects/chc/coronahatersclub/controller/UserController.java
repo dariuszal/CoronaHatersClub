@@ -3,7 +3,6 @@ package lt.codeacademy.projects.chc.coronahatersclub.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lt.codeacademy.projects.chc.coronahatersclub.model.User;
-import lt.codeacademy.projects.chc.coronahatersclub.requests.PostIdRequest;
 import lt.codeacademy.projects.chc.coronahatersclub.requests.UserEditRequest;
 import lt.codeacademy.projects.chc.coronahatersclub.service.CommentService;
 import lt.codeacademy.projects.chc.coronahatersclub.service.PostService;
@@ -12,10 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -55,10 +51,41 @@ public class UserController {
         model.addAttribute("commentCount",commentCount);
         return "profile";
     }
+//    @PostMapping("/user/profile")
+//    public String editUser(@ModelAttribute UserEditRequest edit, Authentication authentication) {
+//        userService.editUser(edit,authentication);
+//        return "profile";
+//    }
+
     @PostMapping("/user/profile")
-    public String editUser(@ModelAttribute UserEditRequest edit, Authentication authentication) {
+    public String editUser(Authentication authentication,
+                           @RequestParam(name = "firstName", required = false) String firstName,
+                           @RequestParam(name = "lastName", required = false) String lastName,
+                           @RequestParam(name = "email", required = false) String email,
+                           @RequestParam(name = "birthYear", required = false)Integer birthYear,
+                           @RequestParam(name = "birthMonth", required = false) Integer birthMonth,
+                           @RequestParam(name = "birthDay", required = false) Integer birthDay,
+                           @RequestParam(name = "address", required = false) String address,
+                           @RequestParam(name = "country", required = false) String country,
+                           @RequestParam(name = "phone", required = false) String phone,
+                           @RequestParam(name = "title", required = false) String title,
+                           @RequestParam(name = "about", required = false) String about
+                           ) {
+        UserEditRequest edit = new UserEditRequest();
+        edit.setFirstName(firstName);
+        edit.setLastName(lastName);
+        edit.setEmail(email);
+        edit.setBirthYear(birthYear);
+        edit.setBirthMonth(birthMonth);
+        edit.setBirthDay(birthDay);
+        edit.setAddress(address);
+        edit.setCountry(country);
+        edit.setPhone(phone);
+        edit.setTitle(title);
+        edit.setAbout(about);
+
         userService.editUser(edit,authentication);
-        return "profile";
+        return "redirect:/user/profile";
     }
 
     @GetMapping("/user/profile/posts")
@@ -66,14 +93,6 @@ public class UserController {
         var posts = postService.getAllUserPosts(authentication);
         model.addAttribute("posts", posts);
         return "userposts";
-    }
-
-    //TODO SET ACCESSIBLE FOR THE USER HIMSELF ONLY. Maybe not necessary as posts are deleted for logged in user only.
-    @PostMapping("/user/profile/posts/delete")
-    public String deletePost(@ModelAttribute PostIdRequest post) {
-        System.out.println(post.getPostId());
-        postService.deletePost(post.getPostId());
-        return "redirect:/user/profile/posts";
     }
 
 }

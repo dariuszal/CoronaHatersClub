@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Error</title>
 </head>
-<body>
+<body style="font-size: 36px;">
+<p th:text="${timestamp}"></p>
+<p th:text="'status:'+${status}"></p>
+<p th:text="'error:'+${error}"></p>
+<p th:text="${message}"></p>
 
 </body>
 </html>

@@ -21,7 +21,9 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "posted_by")
     private User user;
+    @Column(length = 25)
     private String title;
+    @Column(length = 1000)
     private String body;
     private ZonedDateTime created;
 

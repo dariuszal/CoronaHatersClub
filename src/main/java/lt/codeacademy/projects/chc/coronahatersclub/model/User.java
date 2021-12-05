@@ -38,7 +38,6 @@ public class User implements UserDetails {
     private String password;
 
     @Column(unique = true)
-
     @Email
     @NotNull
     private String email;

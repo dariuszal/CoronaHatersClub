@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"><head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="postsfragment(posts)" >
+    <div th:each="post: ${posts}" class="bg-white rounded-7 shadow p-4 pt-0 mb-3">
+        <div class="allposts">
+            <h2 class="pt-3" th:text="${post.title}"></h2>
+            <div sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getId() == post.getUser().getId() || #authorization.expression('hasAuthority(''ADMIN'')')}" class="post-details">
+
+                <a style="color: black" class="nav-link mt-1"
+                   onclick="reply_click(this.id),getModal()"
+                   th:id="'#modal'+${post.id}"
+                   role="button"
+                   data-mdb-toggle="dropdown"
+                   aria-expanded="false">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li>
+                        <button type="button" class="dropdown-item" data-bs-toggle="modal"
+                                th:data-bs-target="'#modal'+${post.id}"><div th:text="#{deletePost}" style="display: inline-block"></div>
+                        </button>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#" th:text="#{editPost}"></a>
+                    </li>
+                </ul>
+            </div>
+            <th:block th:replace="_modals :: modal(modalid=${post.id})">modal</th:block>
+        </div>
+        <p class="font-italic" th:text="${post.created.getYear()+' '+post.getCreated().getMonth()+' '+post.getCreated().getDayOfMonth()+' '+post.getCreated().getHour()+':'+post.getCreated().getMinute()+':'+post.getCreated().getSecond()}"></p>
+        <p class="m-0" th:text="${post.body}"></p>
+        <p class="m-0 text-end font-italic text-secondary" th:text="#{postedBy}+': '+${post.getUser().getUsername()}"></p>
+    </div>
+
+</div>
+
+</body>
+</html>

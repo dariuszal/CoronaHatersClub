@@ -6,7 +6,7 @@
         </div>
         <div class="modal-body">
             <h3>Are you sure you want to delete this post?</h3>
-            <form th:action="@{/user/profile/posts/delete}" th:object="${post}" method="post">
+            <form th:action="@{/posts/delete}" th:object="${post}" method="post">
                 <input type="hidden" th:field="*{postId}" th:value="${post.getPostId()}" th>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Back</button>

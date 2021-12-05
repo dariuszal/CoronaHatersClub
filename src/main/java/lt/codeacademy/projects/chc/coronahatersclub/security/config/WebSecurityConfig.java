@@ -34,9 +34,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/index",
                         "/hello/**",
                         "/"
-
                 ).permitAll()
-                .antMatchers("/tester/").hasAuthority("USER")
+                .antMatchers("/tester").hasAuthority("USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -63,8 +62,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setUserDetailsService(userService);
         return provider;
     }
-
-
 }
 
 //    protected void configure(HttpSecurity http) throws Exception {

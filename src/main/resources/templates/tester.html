@@ -17,11 +17,15 @@
     Welcome, <span sec:authentication="name">Username</span>
 
 
-    <span sec:authorize="hasAuthority('USER')"></span>
+    <span sec:authorize="hasAuthority('USER')"> awdadwadwawad</span>
 
     <div sec:authentication="name"></div>
 
     <div sec:authentication="principal.authorities"></div>
+
+    <p th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">has authority admin</p>
+    <p th:if="${#authorization.expression('hasAuthority(''USER'')')}">has authority user</p>
+
 
 
 </div>

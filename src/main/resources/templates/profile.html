@@ -20,7 +20,7 @@
                 <div class="about-text go-to">
                     <h3 class="dark-color" style="display: inline-block;">About</h3>
 
-                    <button sec:authorize="isAuthenticated()" type="button" class="btn btn-outline-primary edit-button" data-bs-toggle="modal" data-bs-target="#modal1">Edit</button>
+                    <button sec:authorize="isAuthenticated()" type="button" class="btn btn-outline-primary edit-button shadow" data-bs-toggle="modal" data-bs-target="#modal1" th:text="#{editPost}"></button>
                     <th:block th:replace="_modals :: modal(modalid='1')">modal</th:block>
 
                     <h6 class="theme-color lead"><span th:text="${#authentication.getPrincipal().getTitle()}"></span></h6>
@@ -42,6 +42,10 @@
                             <div class="media">
                                 <label>Phone</label>
                                 <p><span th:text="${#authentication.getPrincipal().getPhoneNumber()}"></span></p>
+                            </div>
+                            <div class="media">
+                                <label>Country</label>
+                                <p><span th:text="${#authentication.getPrincipal().getCountry()}"></span></p>
                             </div>
                         </div>
                         <div class="col-md-6"> <!--Column 2 -->
@@ -67,7 +71,7 @@
                 </div>
             </div>
             <div class="col-lg-4 mx-auto">
-                <div class="about-avatar text-center">
+                <div class="about-avatar text-center shadow">
                     <div class="image-uploader col-md-8 mx-auto">
                         <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
                         <form method="post" th:action="@{/profile/upload}" enctype="multipart/form-data">

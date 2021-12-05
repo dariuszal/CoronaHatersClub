@@ -6,6 +6,7 @@ import lt.codeacademy.projects.chc.coronahatersclub.enums.UserRole;
 import lt.codeacademy.projects.chc.coronahatersclub.model.User;
 import lt.codeacademy.projects.chc.coronahatersclub.repository.UserRepository;
 import lt.codeacademy.projects.chc.coronahatersclub.requests.UserEditRequest;
+import lt.codeacademy.projects.chc.coronahatersclub.validators.UserEditRequestValidator;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,10 +23,11 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserEditRequestValidator editValidator;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email).orElseThrow();
+    public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
+        return userRepository.findByUsernameOrEmail(usernameOrEmail,usernameOrEmail).orElseThrow();
     }
 
     public User findByEmail(String email) {
@@ -35,26 +37,6 @@ public class UserService implements UserDetailsService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow();
     }
-
-//    // TEST REST CONTROLLER
-//    public String signUpUser(UserRequest request) {
-//        boolean userExists = userRepository.findByEmail(request.getEmail()).isPresent() || userRepository.findByUsername(request.getUsername()).isPresent();
-//        if (userExists) {
-//            throw new IllegalStateException("Someone is already registered with this email or username");
-//        }
-//        String encodedPassword = bCryptPasswordEncoder
-//                .encode(request.getPassword());
-//
-//        User newUser = new User(
-//                request.getUsername(),
-//                encodedPassword,
-//                request.getEmail(),
-//                UserRole.USER
-//        );
-//
-//        userRepository.save(newUser);
-//        return "Created new user";
-//    }
 
     public String register(User user) {
         boolean userExists = userRepository.findByEmail(user.getEmail()).isPresent() || userRepository.findByUsername(user.getUsername()).isPresent();
@@ -75,7 +57,6 @@ public class UserService implements UserDetailsService {
     }
 
     public void editUser(UserEditRequest edit, Authentication authentication) {
-        log.info("Logging:",edit);
         LocalDate newDate;
         User user;
         try {
@@ -88,31 +69,7 @@ public class UserService implements UserDetailsService {
         } catch (Exception e) {
             throw e;
         }
-        if(edit.getFirstName() !=null && !edit.getFirstName().equals("")) {
-            user.setFirstName(edit.getFirstName());
-        }
-        if (edit.getLastName() != null && !edit.getLastName().equals("")) {
-            user.setLastName(edit.getLastName());
-
-        }
-        if (edit.getAddress() != null && !edit.getAddress().equals("")) {
-            user.setAddress(edit.getAddress());
-        }
-        if (newDate != null && newDate.isBefore(LocalDate.now())) {
-            user.setBirthdate(newDate);
-        }
-        if (edit.getPhone() != null && edit.getPhone() != "") {
-            user.setPhoneNumber(edit.getPhone());
-        }
-        if (edit.getCountry() != null && !edit.getCountry().equals("")) {
-            user.setCountry(edit.getCountry());
-        }
-        if (edit.getTitle() != null && !edit.getTitle().equals("")) {
-            user.setTitle(edit.getTitle());
-        }
-        if (edit.getAbout() != null && !edit.getAbout().isEmpty()) {
-            user.setAboutMe(edit.getAbout());
-        }
+        editValidator.validate(user,edit,newDate);
         userRepository.save(user);
     }
 }

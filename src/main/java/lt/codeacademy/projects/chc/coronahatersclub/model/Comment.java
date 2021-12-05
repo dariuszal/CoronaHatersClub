@@ -23,6 +23,7 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    @Column(length = 500)
     private String body;
     private LocalDate date;
 

@@ -25,15 +25,15 @@
                 <div class="collapse navbar-collapse" id="navbarsExample02">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                            <a class="nav-link active" aria-current="page" th:text="#{home}" th:href="@{/}"></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/}">Link</a>
+                            <a class="nav-link" th:text="#{posts}" th:href="@{/posts}">Posts</a>
                         </li>
                     </ul>
                     <div sec:authorize="!isAuthenticated()" class="d-flex align-items-center fs-6">
-                        <a href="/login"><button class="btn btn-link px-3 me-2 ripple-surface" type="button">LOGIN</button></a>
-                        <a href="/register"><button class="btn btn-primary me-3 ripple-surface" type="button">SING UP FOR FREE</button></a>
+                        <a href="/login"><button class="btn btn-link px-3 me-2 ripple-surface" th:text="#{navLogin}" type="button"></button></a>
+                        <a href="/register"><button class="btn btn-primary me-3 ripple-surface" th:text="#{navRegister}" type="button"></button></a>
                         <div th:replace="fragments/languages :: languages">
                             </div>
                     </div>
@@ -45,11 +45,11 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" style="padding: 0;"
                                 aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" th:href="@{/user/profile}">Profile</a></li>
-                                <li><a class="dropdown-item" th:href="@{/user/profile/posts}">My Posts</a></li>
-                                <li><a class="dropdown-item" th:href="@{/posts/new}">New Post</a></li>
+                                <li><a class="dropdown-item" th:text="#{profile}" th:href="@{/user/profile}"></a></li>
+                                <li><a class="dropdown-item" th:text="#{myPosts}" th:href="@{/user/profile/posts}"></a></li>
+                                <li><a class="dropdown-item" th:text="#{newPost}" th:href="@{/posts/new}"></a></li>
                                 <hr class="mt-0 mb-0">
-                                <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+                                <li><a class="dropdown-item" th:text="#{logout}" th:href="@{/logout}"></a></li>
                             </ul>
                         </li>
                         <div th:replace="fragments/languages :: languages">
