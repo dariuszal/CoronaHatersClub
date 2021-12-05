@@ -3,6 +3,7 @@ package lt.codeacademy.projects.chc.coronahatersclub.controller;
 import lombok.RequiredArgsConstructor;
 import lt.codeacademy.projects.chc.coronahatersclub.model.Post;
 import lt.codeacademy.projects.chc.coronahatersclub.requests.PostIdRequest;
+import lt.codeacademy.projects.chc.coronahatersclub.service.CommentService;
 import lt.codeacademy.projects.chc.coronahatersclub.service.PostService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/posts")
 public class PostController {
     private final PostService postService;
+    private final CommentService commentService;
 
     @GetMapping
     public String posts(@RequestParam(name = "page", required = false) Integer page, Model model) {
@@ -22,7 +24,6 @@ public class PostController {
         var posts = postService.getAllPostsPageable(page);
         model.addAttribute("posts", posts);
         model.addAttribute("currentPage", page);
-
         return "posts";
     }
 

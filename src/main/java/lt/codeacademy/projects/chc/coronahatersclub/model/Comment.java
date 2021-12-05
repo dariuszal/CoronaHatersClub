@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -25,11 +25,12 @@ public class Comment {
     private User user;
     @Column(length = 500)
     private String body;
-    private LocalDate date;
+    private LocalDateTime date;
 
-    public Comment(Post post, String body) {
+    public Comment(Post post, String body, User user) {
         this.post = post;
         this.body = body;
-        this.date = LocalDate.now();
+        this.user = user;
+        this.date = LocalDateTime.now();
     }
 }

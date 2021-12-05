@@ -6,8 +6,6 @@ import lt.codeacademy.projects.chc.coronahatersclub.model.Post;
 import lt.codeacademy.projects.chc.coronahatersclub.model.User;
 import lt.codeacademy.projects.chc.coronahatersclub.repository.CommentRepository;
 import lt.codeacademy.projects.chc.coronahatersclub.repository.PostRepository;
-import lt.codeacademy.projects.chc.coronahatersclub.repository.UserRepository;
-import lt.codeacademy.projects.chc.coronahatersclub.requests.CommentRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -18,17 +16,18 @@ import java.util.List;
 public class CommentService {
    private final CommentRepository commentRepository;
    private final PostRepository postRepository;
-   private final UserRepository userRepository;
 
-    public String createNewComment(CommentRequest request) {
-        Post post = postRepository.findById(request.getPostId()).orElseThrow();
-        User user = userRepository.findById(request.getUserId()).orElseThrow();
+
+    public String createNewComment(Long postId, String commentBody, Authentication authentication) {
+        Post post = postRepository.findById(postId).orElseThrow();
+        User user = (User) authentication.getPrincipal();
 
         Comment comment = new Comment(
                 post,
-                request.getBody()
+                commentBody,
+                user
         );
-        comment.setUser(user);
+        post.getComments().add(comment);
         commentRepository.save(comment);
         return "new comment generated";
     }
@@ -36,5 +35,8 @@ public class CommentService {
     public List<Comment> getAllUserComments(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         return commentRepository.findAllByUser(user);
+    }
+    public List<Comment> getAllComments() {
+        return commentRepository.findAll();
     }
 }

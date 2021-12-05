@@ -15,3 +15,11 @@
     top: 0;
     right: 5%;
 }
+.comment-content:nth-child(even) {
+    background: #1266F1;
+    color:#fff;
+}
+.comment-content:nth-child(odd) {
+    background: #FBFBFB;
+    color: #000000;
+}

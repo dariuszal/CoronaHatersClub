@@ -34,9 +34,15 @@
                 <a class="btn btn-primary" th:href="@{/posts/new}">Create New Post</a>
             </div>
 
+            <!--Upper Next and Previous buttons for pages-->
+            <div th:replace="fragments/postspages ::postspagesfragment"></div>
+
             <div th:replace="fragments/posts ::postsfragment(posts=${posts})">
                 <!-- Posts list from post fragment -->
             </div>
+
+            <!--Lower Next and Previous buttons for pages-->
+            <div th:replace="fragments/postspages ::postspagesfragment"></div>
 
         </div>
 

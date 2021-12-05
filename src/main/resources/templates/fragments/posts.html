@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"><head>
+<html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<div th:fragment="postsfragment(posts)" >
+<div th:fragment="postsfragment(posts)">
     <div th:each="post: ${posts}" class="bg-white rounded-7 shadow p-4 pt-0 mb-3">
         <div class="allposts">
             <h2 class="pt-3" th:text="${post.title}"></h2>
-            <div sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getId() == post.getUser().getId() || #authorization.expression('hasAuthority(''ADMIN'')')}" class="post-details">
+            <div sec:authorize="isAuthenticated()"
+                 th:if="${#authentication.getPrincipal().getId() == post.getUser().getId() || #authorization.expression('hasAuthority(''ADMIN'')')}"
+                 class="post-details">
 
                 <a style="color: black" class="nav-link mt-1"
                    onclick="reply_click(this.id),getModal()"
@@ -22,7 +25,8 @@
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li>
                         <button type="button" class="dropdown-item" data-bs-toggle="modal"
-                                th:data-bs-target="'#modal'+${post.id}"><div th:text="#{deletePost}" style="display: inline-block"></div>
+                                th:data-bs-target="'#modal'+${post.id}">
+                            <div th:text="#{deletePost}" style="display: inline-block"></div>
                         </button>
                     </li>
                     <li>
@@ -32,9 +36,17 @@
             </div>
             <th:block th:replace="_modals :: modal(modalid=${post.id})">modal</th:block>
         </div>
-        <p class="font-italic" th:text="${post.created.getYear()+' '+post.getCreated().getMonth()+' '+post.getCreated().getDayOfMonth()+' '+post.getCreated().getHour()+':'+post.getCreated().getMinute()+':'+post.getCreated().getSecond()}"></p>
+        <p class="font-italic"
+           th:text="${post.created.getYear()+' '+post.getCreated().getMonth()+' '+post.getCreated().getDayOfMonth()+' '+post.getCreated().getHour()+':'+post.getCreated().getMinute()+':'+post.getCreated().getSecond()}"></p>
         <p class="m-0" th:text="${post.body}"></p>
-        <p class="m-0 text-end font-italic text-secondary" th:text="#{postedBy}+': '+${post.getUser().getUsername()}"></p>
+        <p class="m-0 text-end font-italic text-secondary"
+           th:text="#{postedBy}+': '+${post.getUser().getUsername()}"></p>
+        <!--Comments Section -->
+        <div th:replace="fragments/comments :: comments(post=${post})">
+            <!-- Comments fragment -->
+        </div>
+
+        </div>
     </div>
 
 </div>

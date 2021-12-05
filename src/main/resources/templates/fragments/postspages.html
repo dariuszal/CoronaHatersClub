@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="postspagesfragment" class="text-center">
+  <a th:href="@{/posts(page=${currentPage - 1})}" th:if="${currentPage} &gt; 0" th:text="'< '+#{Back}"></a>
+  <a th:href="@{/posts(page=${currentPage + 1})}" th:if="${currentPage} &lt; ${posts.totalPages-1}" th:text="#{Next}+' >'">Next ></a>
+</div>
+
+</body>
+</html>
