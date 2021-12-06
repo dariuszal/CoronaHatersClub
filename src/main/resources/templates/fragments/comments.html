@@ -41,6 +41,8 @@
              class="comment-content pt-2 pb-2 mb-2 rounded-5 shadow">
             <h4 class="mt-1 ms-3" th:text="${comment.user.username}+' :'"></h4>
             <p class="ms-3" th:text="${comment.body}" style="word-wrap:break-word"></p>
+            <p class="comment-date ms-1 fs-6"
+               th:text="${comment.date.getYear()+' '+comment.date.getMonth()+' '+comment.date.getDayOfMonth()+' '+comment.date.getHour()+':'+comment.date.getMinute()+':'+comment.date.getSecond()}"></p>
         </div>
         <p th:if="${post.comments.isEmpty()}" th:text="#{noComments}"></p>
 

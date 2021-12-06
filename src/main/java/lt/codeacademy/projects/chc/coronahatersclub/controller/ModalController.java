@@ -32,12 +32,5 @@ public class ModalController {
         model.addAttribute("post", request);
         return "modaldeletepost";
     }
-    @GetMapping("/posts/edit/{postId")
-    public String modal3(Model model, @PathVariable Long postId) {
-        PostIdRequest request = new PostIdRequest();
-        request.setPostId(postId);
-        model.addAttribute("post", request);
-        return "modaleditpost";
-    }
 
 }

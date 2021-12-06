@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- MDB -->
+    <link rel="stylesheet" th:href="@{/styles/MDB5/css/mdb.min.css}"/>
+    <link rel="stylesheet" th:href="@{/styles/styles.css}">
+    <meta charset="UTF-8">
+    <title>Edit Post</title>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header">
+    <!--Header from fragments/header-->
+</div>
+
+<section class="w-100 p-4">
+    <div class="row">
+        <div class="col-md-3 col-example"></div>
+
+        <div class="col-md-6 col-example">
+                <form th:action="'/posts/'+${postId}+'/edit'" method="post">
+                    <div class="d-flex flex-row align-items-center mb-4 w-50">
+                        <div class="form-outline flex-fill mb-0">
+                            <input type="text" maxlength="25" name="postTitle" th:value="${post.title}" id="titleInput" class="form-control"/>
+                            <label class="form-label" for="titleInput" th:text="#{postTitle}"></label>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <div class="form-outline flex-fill mb-0">
+                            <textarea type="text" name="postBody" th:text="${post.body}" id="bodyInput" rows="8" class="form-control"></textarea>
+                            <label class="form-label" for="bodyInput" th:text="#{postBody}"></label>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                        <button type="submit" class="btn btn-primary" th:text="#{postPost}"></button>
+                    </div>
+
+                </form>
+        </div>
+
+
+        <div class="col-md-3 col-example">
+            <a class="btn btn-primary text-center fs-2 fw-bold rounded-5" th:text="#{myPosts}" th:href="@{/user/profile/posts}" style="width: 70%;height: 70px"></a>
+        </div>
+    </div>
+</section>
+
+
+<div th:replace="fragments/footer :: footer1">
+
+</div>
+</body>
+<script type="text/javascript" th:src="@{/styles/MDB5/js/mdb.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+</html>

@@ -1,16 +1,16 @@
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Delete post</h5>
+            <h5 class="modal-title" id="exampleModalLabel" th:text="#{deletePost}"></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <h3>Are you sure you want to delete this post?</h3>
+            <h3 th:text="#{deletePostConfirmation}"></h3>
             <form th:action="@{/posts/delete}" th:object="${post}" method="post">
                 <input type="hidden" th:field="*{postId}" th:value="${post.getPostId()}" th>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Back</button>
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" th:text="#{goBack}"></button>
+                    <button type="submit" class="btn btn-danger" th:text="#{deletePost}"></button>
                 </div>
             </form>
         </div>

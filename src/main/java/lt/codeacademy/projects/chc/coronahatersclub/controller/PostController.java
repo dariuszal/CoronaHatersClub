@@ -46,4 +46,18 @@ public class PostController {
         return postService.deletePost(post.getPostId(), authentication);
     }
 
+    @GetMapping("/{postId}/edit")
+    public String editPostGet(Model model, @PathVariable Long postId) {
+        Post post = postService.getPost(postId);
+        model.addAttribute("post", post);
+        return "editpost";
+    }
+
+    @PostMapping("/{postId}/edit")
+    public String editPostPost(@PathVariable Long postId,
+                               @RequestParam(name = "postTitle") String postTitle,
+                               @RequestParam(name = "postBody") String postBody,
+                               Authentication authentication) {
+        return postService.editPost(postId,postTitle,postBody,authentication);
+    }
 }

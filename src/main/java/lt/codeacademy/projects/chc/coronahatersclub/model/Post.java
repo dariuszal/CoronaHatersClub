@@ -30,6 +30,10 @@ public class Post {
     private ZonedDateTime created;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "updated_by")
+    private User updatedBy;
+    private LocalDateTime lastUpdated;
 
     public Post(User user, String title, String body) {
         this.user = user;
@@ -38,14 +42,4 @@ public class Post {
         LocalDateTime.now().atZone(ZoneId.of("UTC"));
     }
 
-    @Override
-    public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", user=" + user +
-                ", title='" + title + '\'' +
-                ", body='" + body + '\'' +
-                ", created=" + created +
-                '}';
-    }
 }
