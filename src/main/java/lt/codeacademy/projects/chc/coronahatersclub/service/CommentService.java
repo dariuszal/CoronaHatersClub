@@ -9,6 +9,7 @@ import lt.codeacademy.projects.chc.coronahatersclub.repository.PostRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.security.InvalidParameterException;
 import java.util.List;
 
 @Service
@@ -19,6 +20,9 @@ public class CommentService {
 
 
     public String createNewComment(Long postId, String commentBody, Authentication authentication) {
+        if(commentBody.length() < 1) {
+            throw new InvalidParameterException("Comment body cannot be empty");
+        }
         Post post = postRepository.findById(postId).orElseThrow();
         User user = (User) authentication.getPrincipal();
 

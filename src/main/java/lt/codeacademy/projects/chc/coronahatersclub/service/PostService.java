@@ -37,8 +37,7 @@ public class PostService {
 
     public String deletePost(Long postId, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
-        Post post = postRepository.findById(postId).orElseThrow(()->new EntityNotFoundException("Post with given Id does not exist"));
-        boolean deleteValid = postActionValidator.deleteValidate(user,post);
+        boolean deleteValid = postActionValidator.deleteValidate(user);
         if(deleteValid) {
             postRepository.deleteById(postId);
         }
@@ -47,7 +46,7 @@ public class PostService {
     public String editPost(Long postId, String postTitle, String postBody, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         Post post = postRepository.findById(postId).orElseThrow(()-> new EntityNotFoundException("Post with given Id does not exist"));
-        boolean editValid = postActionValidator.editValidate(user,post);
+        boolean editValid = postActionValidator.editValidate(user,post,postTitle,postBody);
         if(editValid) {
             post.setTitle(postTitle);
             post.setBody(postBody);

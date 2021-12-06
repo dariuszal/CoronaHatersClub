@@ -1,8 +1,8 @@
 package lt.codeacademy.projects.chc.coronahatersclub.controller;
 
 import lombok.RequiredArgsConstructor;
-import lt.codeacademy.projects.chc.coronahatersclub.model.User;
 import lt.codeacademy.projects.chc.coronahatersclub.convertors.UserToUserEditRequest;
+import lt.codeacademy.projects.chc.coronahatersclub.model.User;
 import lt.codeacademy.projects.chc.coronahatersclub.requests.PostIdRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,6 @@ public class ModalController {
         model.addAttribute("userProfile",userProfile);
         return "modaleditprofile";
     }
-
     @GetMapping("/posts/delete/{postId}")
     public String modal2(Model model, @PathVariable Long postId) {
         PostIdRequest request = new PostIdRequest();

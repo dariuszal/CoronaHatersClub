@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Setter
@@ -85,7 +85,7 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =
                 new SimpleGrantedAuthority(role.name());
-        return Collections.singletonList(authority);
+        return List.of(authority);
     }
 
     @Override

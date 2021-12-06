@@ -1,0 +1,24 @@
+
+<div th:fragment="deletecomment(comment)" class="modal fade" th:id="'commentmodal'+${comment.id}" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3 th:text="#{deleteCommentConfirmation}"></h3>
+                    <form th:action="@{/posts/delete}" method="post">
+                        <p th:text="${comment.id}"></p>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" th:text="#{goBack}"></button>
+                            <button type="submit" class="btn btn-danger" th:text="#{deletePost}"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+</div>

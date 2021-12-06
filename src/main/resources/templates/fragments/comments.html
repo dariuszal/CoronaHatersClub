@@ -39,6 +39,31 @@
     <div class="collapse mt-3" th:id="'post'+${post.id}+'commentsDiv'">
         <div th:each="comment: ${post.comments}"
              class="comment-content pt-2 pb-2 mb-2 rounded-5 shadow">
+            <div sec:authorize="isAuthenticated()"
+                 th:if="${#authentication.getPrincipal().getId() == post.getUser().getId() || #authorization.expression('hasAuthority(''ADMIN'')')}"
+                 class="comment-details">
+
+                <a style="color: black" class="nav-link mt-1"
+                   role="button"
+                   data-mdb-toggle="dropdown"
+                   aria-expanded="false">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li>
+                        <button type="button" class="dropdown-item" data-bs-toggle="modal"
+                                th:data-bs-target="'#commentmodal'+${comment.id}">
+                            <div th:text="#{deletePost}" style="display: inline-block"></div>
+                        </button>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" th:href="'/posts/'+${post.id}+'/edit'" th:text="#{editPost}"></a>
+                    </li>
+                </ul>
+            </div>
+            <div th:replace="fragments/deletecomment :: deletecomment(comment=${comment})">
+
+            </div>
             <h4 class="mt-1 ms-3" th:text="${comment.user.username}+' :'"></h4>
             <p class="ms-3" th:text="${comment.body}" style="word-wrap:break-word"></p>
             <p class="comment-date ms-1 fs-6"

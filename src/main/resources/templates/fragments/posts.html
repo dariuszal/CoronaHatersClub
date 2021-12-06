@@ -24,7 +24,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li>
-                        <button type="button" class="dropdown-item" data-bs-toggle="modal"
+                        <button th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" type="button" class="dropdown-item" data-bs-toggle="modal"
                                 th:data-bs-target="'#modal'+${post.id}">
                             <div th:text="#{deletePost}" style="display: inline-block"></div>
                         </button>

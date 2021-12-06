@@ -13,15 +13,17 @@
     font-size: 28px;
     position: absolute;
     top: 0;
-    right: 5%;
+    right: 3%;
 }
-.comment-content:nth-child(even) {
-    background: #1266F1;
-    color:#fff;
+.comment-details {
+    padding: 0;
+    font-size: 18px;
+    position: absolute;
+    top: 0;
+    right: 3%;
 }
-.comment-content:nth-child(odd) {
-    background: #FBFBFB;
-    color: #000000;
+.comment-content {
+    position: relative;;
 }
 .comment-date {
     font-size: 10px !important;
