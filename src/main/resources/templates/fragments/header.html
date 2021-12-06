@@ -41,7 +41,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false"><img id="profile-img"
-                                    class="rounded-circle" th:src="${#authentication.getPrincipal().getProfileImage()}" onerror="this.onerror=null; this.src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'">
+                                    class="rounded-circle" th:src="${loggedUser.getProfileImage()}" onerror="this.onerror=null; this.src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" style="padding: 0;"
                                 aria-labelledby="navbarDropdownMenuLink">

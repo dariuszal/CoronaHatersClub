@@ -23,47 +23,47 @@
                     <button sec:authorize="isAuthenticated()" type="button" class="btn btn-outline-primary edit-button shadow" data-bs-toggle="modal" data-bs-target="#modal1" th:text="#{editPost}"></button>
                     <th:block th:replace="_modals :: modal(modalid='1')">modal</th:block>
 
-                    <h6 class="theme-color lead"><span th:text="${#authentication.getPrincipal().getTitle()}"></span></h6>
-                    <p><span th:text="${#authentication.getPrincipal().getAboutMe()}"></span></p>
+                    <h6 class="theme-color lead"><span th:text="${loggedUser.getTitle()}"></span></h6>
+                    <p><span th:text="${loggedUser.getAboutMe()}"></span></p>
                     <div class="row about-list">
                         <div class="col-md-6"> <!--Column 2 -->
                             <div class="media">
                                 <label>Name</label>
-                                <p><span th:text="${#authentication.getPrincipal().getFirstName()}"></span></p>
+                                <p><span th:text="${loggedUser.getFirstName()}"></span></p>
                             </div>
                             <div class="media">
                                 <label>Lastname</label>
-                                <p><span th:text="${#authentication.getPrincipal().getLastName()}"></span></p>
+                                <p><span th:text="${loggedUser.getLastName()}"></span></p>
                             </div>
                             <div class="media">
                                 <label>Birthday</label>
-                                <p><span th:text="${#authentication.getPrincipal().getBirthdate()}"></span></p>
+                                <p><span th:text="${loggedUser.getBirthdate()}"></span></p>
                             </div>
                             <div class="media">
                                 <label>Phone</label>
-                                <p><span th:text="${#authentication.getPrincipal().getPhoneNumber()}"></span></p>
+                                <p><span th:text="${loggedUser.getPhoneNumber()}"></span></p>
                             </div>
                             <div class="media">
                                 <label>Country</label>
-                                <p><span th:text="${#authentication.getPrincipal().getCountry()}"></span></p>
+                                <p><span th:text="${loggedUser.getCountry()}"></span></p>
                             </div>
                         </div>
                         <div class="col-md-6"> <!--Column 2 -->
                             <div class="media">
                                 <label>E-mail</label>
-                                <p><span th:text="${#authentication.getPrincipal().getEmail()}"></span></p>
+                                <p><span th:text="${loggedUser.getEmail()}"></span></p>
                             </div>
                             <div class="media">
                                 <label>Username</label>
-                                <p><span th:text="${#authentication.getPrincipal().getUsername()}"></span></p>
+                                <p><span th:text="${loggedUser.getUsername()}"></span></p>
                             </div>
                             <div class="media">
                                 <label>Address</label>
-                                <p><span th:text="${#authentication.getPrincipal().getAddress()}"></span></p>
+                                <p><span th:text="${loggedUser.getAddress()}"></span></p>
                             </div>
                             <div class="media">
                                 <label>Registered</label>
-                                <p><span th:text="${#authentication.getPrincipal().getDateCreated()}"></span></p>
+                                <p><span th:text="${loggedUser.getDateCreated()}"></span></p>
                             </div>
 
                         </div>
@@ -82,7 +82,7 @@
                             <button type="submit" class="btn btn-outline-warning my-1">Upload File</button>
                         </form>
                     </div>
-                    <img th:src="${#authentication.getPrincipal().getProfileImage()}" onerror="this.onerror=null; this.src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'">
+                    <img th:src="${loggedUser.getProfileImage()}" onerror="this.onerror=null; this.src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'">
                 </div>
             </div>
         </div>

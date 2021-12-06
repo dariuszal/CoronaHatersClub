@@ -16,7 +16,7 @@
        aria-controls="collapseExample"
     ></a>
     <!-- Button Comment -->
-    <div sec:authorize="isAuthenticated()" style="display: inline-block" class="w-50 text-center">
+    <div sec:authorize="isAuthenticated()" style="display: inline-block" class="text-start">
         <a class="btn btn-primary"
            th:text="#{Comment}"
            data-mdb-toggle="collapse"
@@ -40,7 +40,7 @@
         <div th:each="comment: ${post.comments}"
              class="comment-content pt-2 pb-2 mb-2 rounded-5 shadow">
             <div sec:authorize="isAuthenticated()"
-                 th:if="${#authentication.getPrincipal().getId() == post.getUser().getId() || #authorization.expression('hasAuthority(''ADMIN'')')}"
+                 th:if="${loggedUser.getId() == post.getUser().getId() || #authorization.expression('hasAuthority(''ADMIN'')')}"
                  class="comment-details">
 
                 <a style="color: black" class="nav-link mt-1"
@@ -57,7 +57,7 @@
                         </button>
                     </li>
                     <li>
-                        <a class="dropdown-item" th:href="'/posts/'+${post.id}+'/edit'" th:text="#{editPost}"></a>
+                        <a th:if="${loggedUser.getId() == post.getUser().getId()}" class="dropdown-item" th:href="'/posts/'+${post.id}+'/edit'" th:text="#{editPost}"></a>
                     </li>
                 </ul>
             </div>

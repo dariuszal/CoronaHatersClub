@@ -6,6 +6,7 @@ import lt.codeacademy.projects.chc.coronahatersclub.enums.UserRole;
 import lt.codeacademy.projects.chc.coronahatersclub.model.User;
 import lt.codeacademy.projects.chc.coronahatersclub.repository.UserRepository;
 import lt.codeacademy.projects.chc.coronahatersclub.requests.UserEditRequest;
+import lt.codeacademy.projects.chc.coronahatersclub.security.UserPrincipal;
 import lt.codeacademy.projects.chc.coronahatersclub.validators.UserEditRequestValidator;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,7 +28,10 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
-        return userRepository.findByUsernameOrEmail(usernameOrEmail,usernameOrEmail).orElseThrow();
+        return userRepository.findByUsernameOrEmail(usernameOrEmail,usernameOrEmail)
+                .map(user -> new UserPrincipal(user.getId(),user.getEmail(),user.getUsername(),user.getPassword(),user.getRole()))
+                .orElseThrow(()-> new UsernameNotFoundException("User not found"));
+
     }
 
     public User findByEmail(String email) {

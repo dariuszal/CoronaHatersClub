@@ -43,11 +43,11 @@ public class UserController {
 
     //    @PreAuthorize("authentication.principal.userid == #userId")
     @GetMapping(path = "/user/profile")
-    public String userProfile(Model model, Authentication authentication) {
+    public String userProfile(@ModelAttribute(name = "loggedUser") User user, Model model) {
         model.addAttribute("edit", new UserEditRequest());
-        var postCount = postService.getAllUserPosts(authentication).size();
+        var postCount = postService.getAllUserPosts(user).size();
         model.addAttribute("postCount", postCount);
-        var commentCount = commentService.getAllUserComments(authentication).size();
+        var commentCount = commentService.getAllUserComments(user).size();
         model.addAttribute("commentCount",commentCount);
         return "profile";
     }
@@ -89,8 +89,8 @@ public class UserController {
     }
 
     @GetMapping("/user/profile/posts")
-    public String userPosts(Model model, Authentication authentication) {
-        var posts = postService.getAllUserPosts(authentication);
+    public String userPosts(@ModelAttribute(name = "loggedUser") User user, Model model) {
+        var posts = postService.getAllUserPosts(user);
         model.addAttribute("posts", posts);
         return "userposts";
     }

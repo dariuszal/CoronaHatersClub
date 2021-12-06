@@ -2,10 +2,11 @@ package lt.codeacademy.projects.chc.coronahatersclub.controller;
 
 import lombok.RequiredArgsConstructor;
 import lt.codeacademy.projects.chc.coronahatersclub.model.Post;
+import lt.codeacademy.projects.chc.coronahatersclub.model.User;
 import lt.codeacademy.projects.chc.coronahatersclub.requests.PostIdRequest;
 import lt.codeacademy.projects.chc.coronahatersclub.service.CommentService;
 import lt.codeacademy.projects.chc.coronahatersclub.service.PostService;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,16 +35,17 @@ public class PostController {
     }
 
     @PostMapping("/new")
-    public String createNewPost(@ModelAttribute Post post, BindingResult errors, Authentication authentication) {
+    public String createNewPost(@ModelAttribute(name = "loggedUser") User user, @ModelAttribute Post post, BindingResult errors) {
         if (errors.hasErrors()) {
             return "/posts/new";
         }
-        return postService.createNewPost(authentication, post);
+        return postService.createNewPost(user, post);
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/delete")
-    public String deletePost(@ModelAttribute PostIdRequest post, Authentication authentication) {
-        return postService.deletePost(post.getPostId(), authentication);
+    public String deletePost(@ModelAttribute PostIdRequest post, @ModelAttribute(name = "loggedUser") User user) {
+        return postService.deletePost(post.getPostId(), user);
     }
 
     @GetMapping("/{postId}/edit")
@@ -57,7 +59,7 @@ public class PostController {
     public String editPostPost(@PathVariable Long postId,
                                @RequestParam(name = "postTitle") String postTitle,
                                @RequestParam(name = "postBody") String postBody,
-                               Authentication authentication) {
-        return postService.editPost(postId,postTitle,postBody,authentication);
+                               @ModelAttribute (name = "loggedUser") User user) {
+        return postService.editPost(postId,postTitle,postBody,user);
     }
 }

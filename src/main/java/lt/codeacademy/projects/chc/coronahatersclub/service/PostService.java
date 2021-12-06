@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lt.codeacademy.projects.chc.coronahatersclub.model.Post;
 import lt.codeacademy.projects.chc.coronahatersclub.model.User;
 import lt.codeacademy.projects.chc.coronahatersclub.repository.PostRepository;
+import lt.codeacademy.projects.chc.coronahatersclub.repository.UserRepository;
 import lt.codeacademy.projects.chc.coronahatersclub.validators.PostActionValidator;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -20,31 +20,27 @@ import java.util.List;
 public class PostService {
     private final PostRepository postRepository;
     private final PostActionValidator postActionValidator;
+    private final UserRepository userRepository;
 
-    public String createNewPost(Authentication authentication, Post post) {
-        User user = (User)authentication.getPrincipal();
-
+    public String createNewPost(User user, Post post) {
         post.setUser(user);
         post.setCreated(LocalDateTime.now().atZone(ZoneId.of("UTC")));
 
         postRepository.save(post);
         return "redirect:/user/profile/posts";
     }
-    public List<Post> getAllUserPosts(Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+    public List<Post> getAllUserPosts(User user) {
         return postRepository.findAllByUser(user);
     }
 
-    public String deletePost(Long postId, Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+    public String deletePost(Long postId, User user) {
         boolean deleteValid = postActionValidator.deleteValidate(user);
         if(deleteValid) {
             postRepository.deleteById(postId);
         }
         return "redirect:/user/profile/posts";
     }
-    public String editPost(Long postId, String postTitle, String postBody, Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+    public String editPost(Long postId, String postTitle, String postBody, User user) {
         Post post = postRepository.findById(postId).orElseThrow(()-> new EntityNotFoundException("Post with given Id does not exist"));
         boolean editValid = postActionValidator.editValidate(user,post,postTitle,postBody);
         if(editValid) {

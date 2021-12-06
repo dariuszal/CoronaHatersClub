@@ -10,7 +10,7 @@
                 </div>
                 <div class="modal-body">
                     <h3 th:text="#{deleteCommentConfirmation}"></h3>
-                    <form th:action="@{/posts/delete}" method="post">
+                    <form th:action="'/posts/'+${comment.post.id}+'/comments/delete/'+${comment.id}" method="post">
                         <p th:text="${comment.id}"></p>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal" th:text="#{goBack}"></button>

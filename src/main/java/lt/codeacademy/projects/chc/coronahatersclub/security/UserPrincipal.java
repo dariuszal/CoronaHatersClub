@@ -8,14 +8,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 
 @Data
 public class UserPrincipal implements UserDetails {
     private final Long id;
     private final String email;
     private final String username;
-    private final UserRole role;
+    private final List<GrantedAuthority> authorities;
 
     @JsonIgnore
     private final String password;
@@ -25,14 +25,12 @@ public class UserPrincipal implements UserDetails {
         this.email = email;
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.authorities = List.of(new SimpleGrantedAuthority("ROLE_"+role.toString()));
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority =
-                new SimpleGrantedAuthority(role.name());
-        return Collections.singletonList(authority);
+        return authorities;
     }
 
     @Override
