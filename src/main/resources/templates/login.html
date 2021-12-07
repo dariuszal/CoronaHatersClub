@@ -20,22 +20,21 @@
 </div>
 <div class="login-form rounded-5 shadow mx-auto">
     <form class="p-4" th:action="@{/login}" method="post">
-        <div class="fs-3 text-center">Login</div>
+        <div class="fs-3 text-center" th:text="#{loginHeader}"></div>
         <div class="form-group">
-            <label for="emailInput">Email or Username</label>
+            <label for="emailInput"th:text="#{loginUsernameLabel}"></label>
             <input type="text" name="username" class="form-control" id="emailInput" aria-describedby="emailHelp"
-                   placeholder="&#xF0e0; Enter email" style="font-family:Arial, FontAwesome" required>
+                   placeholder="&#xF0e0;" style="font-family:Arial, FontAwesome" required>
             <br>
         </div>
         <div class="form-group">
-            <label for="passwordInput">Password</label>
-            <input type="password" name="password" class="form-control" id="passwordInput" placeholder="&#xF023; Password" style="font-family:Arial, FontAwesome" required>
+            <label for="passwordInput" th:text="#{loginPasswordLabel}"></label>
+            <input type="password" name="password" class="form-control" id="passwordInput" placeholder="&#xF023;" style="font-family:Arial, FontAwesome" required>
         </div>
-        <div class="m-1">
-            Not a member?
-            <a th:href="@{register}" class="">Register now</a>
+        <div class="m-1" th:text="#{loginNotAMember}">
+            <a th:href="@{register}" th:text="#{loginRegisterNow}"></a>
         </div>
-        <button type="submit" class="btn-primary btn-block rounded-5 ripple ripple-surface">Login</button>
+        <button type="submit" class="btn-primary btn-block rounded-5 ripple ripple-surface" th:text="#{loginButtonLogin}"></button>
     </form>
 </div>
 <div th:replace="fragments/footer :: 'footer1'">

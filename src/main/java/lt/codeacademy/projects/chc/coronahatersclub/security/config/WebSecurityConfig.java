@@ -34,12 +34,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/hello/**",
                         "/"
                 ).permitAll()
-                .antMatchers("/tester").hasAuthority("ROLE_USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/", true)
+                .failureUrl("/login?error=true")
                 .and()
                 .logout()
                 .invalidateHttpSession(true)

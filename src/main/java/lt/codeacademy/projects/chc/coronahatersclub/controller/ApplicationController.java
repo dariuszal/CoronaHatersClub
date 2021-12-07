@@ -10,9 +10,5 @@ public class ApplicationController {
     public String login() {
         return"login";
     }
-    @GetMapping("/tester")
-    public String test() {
-        return "tester";
-    }
 
 }
