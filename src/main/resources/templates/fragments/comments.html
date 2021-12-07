@@ -29,7 +29,8 @@
     <div sec:authorize="isAuthenticated()" th:id="'post'+${post.id}+'newCommentDiv'" class="collapse">
         <form th:action="'/posts/'+${post.id}+'/comments/new'" method="post">
             <div class="text-start mt-2 form-group flex-fill">
-                <textarea class="form-control" name="commentBody" aria-label="With textarea" th:id="'inputComment'+${post.id}"></textarea>
+                <textarea class="form-control" name="commentBody" aria-label="With textarea"
+                          th:id="'inputComment'+${post.id}"></textarea>
                 <button type="submit" class="btn btn-primary text-center m-2" th:text="#{Submit}"></button>
             </div>
         </form>
@@ -38,9 +39,9 @@
     <!--Display all comments when click Comments() Button -->
     <div class="collapse mt-3" th:id="'post'+${post.id}+'commentsDiv'">
         <div th:each="comment: ${post.comments}"
-             class="comment-content pt-2 pb-2 mb-2 rounded-5 shadow">
+             class="border border-3 border comment-content pt-2 pb-2 mb-2 rounded-5 shadow">
             <div sec:authorize="isAuthenticated()"
-                 th:if="${loggedUser.getId() == post.getUser().getId() || #authorization.expression('hasAuthority(''ADMIN'')')}"
+                 th:if="${loggedUser.getId() == comment.getUser().getId() || #authorization.expression('hasAuthority(''ROLE_ADMIN'')')}"
                  class="comment-details">
 
                 <a style="color: black" class="nav-link mt-1"
@@ -51,27 +52,31 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li>
-                        <button type="button" class="dropdown-item" data-bs-toggle="modal"
-                                th:data-bs-target="'#commentmodal'+${comment.id}">
+                        <button th:if="${#authorization.expression('hasAuthority(''ROLE_ADMIN'')')}" type="button" class="dropdown-item" data-bs-toggle="modal"
+                                th:data-bs-target="'#commentdeletemodal'+${comment.id}">
                             <div th:text="#{deletePost}" style="display: inline-block"></div>
                         </button>
                     </li>
                     <li>
-                        <a th:if="${loggedUser.getId() == post.getUser().getId()}" class="dropdown-item" th:href="'/posts/'+${post.id}+'/edit'" th:text="#{editPost}"></a>
+                        <button th:if="${loggedUser.getId() == comment.getUser().getId()}" type="button" class="dropdown-item" data-bs-toggle="modal"
+                                th:data-bs-target="'#commenteditmodal'+${comment.id}">
+                            <div th:text="#{editPost}" style="display: inline-block"></div>
+                        </button>
                     </li>
                 </ul>
             </div>
-            <div th:replace="fragments/deletecomment :: deletecomment(comment=${comment})">
+            <div th:replace="fragments/deletecomment :: deletecomment(comment=${comment})"></div>
+            <div th:replace="fragments/editcomment:: editcomment(comment=${comment})"></div>
 
-            </div>
-            <h4 class="mt-1 ms-3" th:text="${comment.user.username}+' :'"></h4>
+            <img class="ms-2 mb-1 comment-profile-img rounded-circle" th:src="${comment.user.getProfileImage()}" onerror="this.onerror=null; this.src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'">
+            <h6 style="display: inline-block" class="mt-1" th:text="${comment.user.username}+' :'"></h6>
             <p class="ms-3" th:text="${comment.body}" style="word-wrap:break-word"></p>
-            <p class="comment-date ms-1 fs-6"
+            <p class="comment-date ms-1 fs-6 mb-0"
                th:text="${comment.date.getYear()+' '+comment.date.getMonth()+' '+comment.date.getDayOfMonth()+' '+comment.date.getHour()+':'+comment.date.getMinute()+':'+comment.date.getSecond()}"></p>
         </div>
         <p th:if="${post.comments.isEmpty()}" th:text="#{noComments}"></p>
 
-</div>
+    </div>
 </div>
 </body>
 </html>

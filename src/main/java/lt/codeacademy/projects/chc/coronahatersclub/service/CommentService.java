@@ -56,4 +56,15 @@ public class CommentService {
         }
         throw new RequestRejectedException("deletion unsuccessful");
     }
+
+    public String editComment(User user, Long commentId, String commentBody) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(()->new EntityNotFoundException("Comment Not Found"));
+        boolean editValid = commentActionValidator.editValidate(user,comment,commentBody);
+        if(editValid) {
+            comment.setBody(commentBody);
+            commentRepository.save(comment);
+            return "redirect:/posts";
+        }
+        throw new RequestRejectedException("edit unsuccessful");
+    }
 }

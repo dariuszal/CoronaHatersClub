@@ -60,11 +60,9 @@ public class UserService implements UserDetailsService {
         return "registerSuccess";
     }
 
-    public void editUser(UserEditRequest edit, Authentication authentication) {
+    public void editUser(UserEditRequest edit, User user) {
         LocalDate newDate;
-        User user;
         try {
-            user = (User) authentication.getPrincipal();
             if (edit.getBirthYear() != null && edit.getBirthMonth() != null && edit.getBirthDay() != null) {
                 newDate = LocalDate.of(edit.getBirthYear(), edit.getBirthMonth(), edit.getBirthDay());
             } else {

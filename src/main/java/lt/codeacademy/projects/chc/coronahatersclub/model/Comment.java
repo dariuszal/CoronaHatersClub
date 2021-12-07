@@ -26,6 +26,7 @@ public class Comment {
     @Column(length = 500)
     private String body;
     private LocalDateTime date;
+    private LocalDateTime lastUpdated;
 
     public Comment(Post post, String body, User user) {
         this.post = post;

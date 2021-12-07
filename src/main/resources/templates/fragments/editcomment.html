@@ -1,0 +1,29 @@
+<div th:fragment="editcomment(comment)" class="modal fade" th:id="'commenteditmodal'+${comment.id}" tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"th:text="#{editCommentHeader}"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="'/posts/'+${comment.post.id}+'/comments/edit/'+${comment.id}" method="post">
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <div class="form-gruop flex-fill mb-0">
+                            <textarea type="text" name="commentBody" th:text="${comment.body}" th:id="'commentBodyInput'+${comment.id}"
+                                      class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                th:text="#{goBack}"></button>
+                        <button type="submit" class="btn btn-success" th:text="#{editPost}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

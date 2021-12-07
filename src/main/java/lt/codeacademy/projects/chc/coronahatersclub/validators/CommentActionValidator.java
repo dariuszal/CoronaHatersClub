@@ -15,4 +15,15 @@ public class CommentActionValidator {
             throw new AccessDeniedException("Access Denied");
         }
     }
+
+    public boolean editValidate(User user, Comment comment, String commentBody) {
+        if(commentBody.length()<1) {
+            return false;
+        }
+        if(comment.getUser() == user) {
+            return true;
+        } else {
+            throw new AccessDeniedException("Acces Denied");
+        }
+    }
 }

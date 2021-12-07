@@ -58,7 +58,7 @@ public class UserController {
 //    }
 
     @PostMapping("/user/profile")
-    public String editUser(Authentication authentication,
+    public String editUser(@ModelAttribute("loggedUser") User user,
                            @RequestParam(name = "firstName", required = false) String firstName,
                            @RequestParam(name = "lastName", required = false) String lastName,
                            @RequestParam(name = "email", required = false) String email,
@@ -84,7 +84,7 @@ public class UserController {
         edit.setTitle(title);
         edit.setAbout(about);
 
-        userService.editUser(edit,authentication);
+        userService.editUser(edit,user);
         return "redirect:/user/profile";
     }
 

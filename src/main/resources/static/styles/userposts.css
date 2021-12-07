@@ -1,4 +1,11 @@
-
+.post-profile-img {
+    display: inline-block;
+    -o-object-fit: cover;
+    object-fit: cover;
+    border-radius: 50%;
+    height:50px;
+    width:50px;
+}
 .col-example {
     border: 2px solid #eee;
     padding: 10px;

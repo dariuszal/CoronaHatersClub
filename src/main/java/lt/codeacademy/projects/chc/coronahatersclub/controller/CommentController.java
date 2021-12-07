@@ -33,4 +33,14 @@ public class CommentController {
         return commentService.deleteComment(user,commentId);
 
     }
+    @PostMapping("/posts/{postId}/comments/edit/{commentId}")
+    public String editComment(
+            @ModelAttribute(name = "loggedUser") User user,
+            @PathVariable(name = "commentId") Long commentId,
+            @RequestParam(name = "commentBody") String commentBody
+    ){
+
+        return commentService.editComment(user,commentId,commentBody);
+
+    }
 }

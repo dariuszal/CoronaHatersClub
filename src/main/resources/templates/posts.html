@@ -30,8 +30,8 @@
             <h1 class="text-center">Corona Haters Club</h1>
 
             <div th:if="${posts.getSize() == 0}" class="text-center">
-                <p>No posts</p>
-                <a class="btn btn-primary" th:href="@{/posts/new}">Create New Post</a>
+                <p th:text="#{noPosts}"></p>
+                <a class="btn btn-primary" th:href="@{/posts/new}" th:text="#{newPost}"></a>
             </div>
 
             <!--Upper Next and Previous buttons for pages-->

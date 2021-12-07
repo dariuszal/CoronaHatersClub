@@ -7,6 +7,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,8 +31,7 @@ public class UploadController {
     private final String PROFILE_IMG_URL = "/uploads/images/profile/";
 
     @PostMapping("/upload")
-    public String uploadFile(@RequestParam("file") MultipartFile file, RedirectAttributes attributes, Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+    public String uploadFile(@ModelAttribute(name = "loggedUser") User user, @RequestParam("file") MultipartFile file, RedirectAttributes attributes) {
         var username = user.getUsername();
         Long id = user.getId();
         // check if file is empty

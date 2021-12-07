@@ -39,7 +39,7 @@
             </div>
 
             <div class="text-center">
-                <a class="btn-lg btn-warning" th:text="#{seeMore}" th:href="@{/posts}"></a>
+                <a th:if="${posts.getSize()>3}" class="btn-lg btn-warning" th:text="#{seeMore}" th:href="@{/posts}"></a>
             </div>
 
         </div>
