@@ -24,7 +24,7 @@
                     <button sec:authorize="isAuthenticated()" type="button" class="btn btn-outline-primary edit-button shadow" data-bs-toggle="modal" data-bs-target="#modal1" th:text="#{editPost}"></button>
                     <th:block th:replace="_modals :: modal(modalid='1')">modal</th:block>
 
-                    <h6 class="theme-color lead"><span th:text="${loggedUser.getTitle()}"></span></h6>
+                    <h6 class="theme-color lead"><span th:text="${loggedUser.getProfileTitle()}"></span></h6>
                     <p><span th:text="${loggedUser.getAboutMe()}"></span></p>
                     <div class="row about-list">
                         <div class="col-md-6"> <!--Column 2 -->

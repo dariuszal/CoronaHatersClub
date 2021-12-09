@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/register",
                         "/uploads/images/profile/**",
                         "/index",
-                        "/hello/**",
+                        "/login/**",
                         "/"
                 ).permitAll()
                 .anyRequest().authenticated()

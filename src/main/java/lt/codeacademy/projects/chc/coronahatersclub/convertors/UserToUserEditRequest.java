@@ -19,7 +19,7 @@ public class UserToUserEditRequest {
         edit.setAddress(user.getAddress());
         edit.setCountry(user.getCountry());
         edit.setPhone(user.getPhoneNumber());
-        edit.setTitle(user.getTitle());
+        edit.setTitle(user.getProfileTitle());
         edit.setAbout(user.getAboutMe());
 
         return edit;

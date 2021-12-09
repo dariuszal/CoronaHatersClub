@@ -1,4 +1,4 @@
-package lt.codeacademy.projects.chc.coronahatersclub.controller.advice;
+package lt.codeacademy.projects.chc.coronahatersclub.controller.controller_advice;
 
 import lombok.RequiredArgsConstructor;
 import lt.codeacademy.projects.chc.coronahatersclub.model.User;

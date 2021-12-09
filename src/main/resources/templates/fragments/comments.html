@@ -52,7 +52,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li>
-                        <button th:if="${#authorization.expression('hasAuthority(''ROLE_ADMIN'')')}" type="button" class="dropdown-item" data-bs-toggle="modal"
+                        <button th:if="${loggedUser.getId() == comment.getUser().getId() || #authorization.expression('hasAuthority(''ROLE_ADMIN'')')}" type="button" class="dropdown-item" data-bs-toggle="modal"
                                 th:data-bs-target="'#commentdeletemodal'+${comment.id}">
                             <div th:text="#{deletePost}" style="display: inline-block"></div>
                         </button>

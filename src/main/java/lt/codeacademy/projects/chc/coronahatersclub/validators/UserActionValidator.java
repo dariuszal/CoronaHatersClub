@@ -1,14 +1,26 @@
 package lt.codeacademy.projects.chc.coronahatersclub.validators;
 
+import lombok.RequiredArgsConstructor;
 import lt.codeacademy.projects.chc.coronahatersclub.model.User;
+import lt.codeacademy.projects.chc.coronahatersclub.repository.UserRepository;
 import lt.codeacademy.projects.chc.coronahatersclub.requests.UserEditRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
 @Service
-public class UserEditRequestValidator {
-    public User  validate(User user, UserEditRequest edit,LocalDate newDate){
+@RequiredArgsConstructor
+public class UserActionValidator {
+
+    private final UserRepository userRepository;
+
+    public boolean validateRegister(User user) {
+        if(userRepository.findByUsernameOrEmail(user.getUsername(),user.getEmail()).isPresent()) {
+            throw new IllegalStateException("Someone is already registered with this email or username");
+        } else return true;
+    }
+
+    public User validateEdit(User user, UserEditRequest edit, LocalDate newDate){
         if(edit.getFirstName() !=null && !edit.getFirstName().equals("")) {
             user.setFirstName(edit.getFirstName());
         }
@@ -29,11 +41,12 @@ public class UserEditRequestValidator {
             user.setCountry(edit.getCountry());
         }
         if (edit.getTitle() != null && !edit.getTitle().equals("")) {
-            user.setTitle(edit.getTitle());
+            user.setProfileTitle(edit.getTitle());
         }
         if (edit.getAbout() != null && !edit.getAbout().isEmpty()) {
             user.setAboutMe(edit.getAbout());
         }
         return user;
     }
+
 }

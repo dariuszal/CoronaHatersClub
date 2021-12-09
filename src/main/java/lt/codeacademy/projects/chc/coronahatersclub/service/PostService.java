@@ -20,7 +20,6 @@ import java.util.List;
 public class PostService {
     private final PostRepository postRepository;
     private final PostActionValidator postActionValidator;
-    private final UserRepository userRepository;
 
     public String createNewPost(User user, Post post) {
         post.setUser(user);
@@ -30,7 +29,7 @@ public class PostService {
         return "redirect:/user/profile/posts";
     }
     public List<Post> getAllUserPosts(User user) {
-        return postRepository.findAllByUser(user);
+        return postRepository.findAllByUserOrderByCreatedDesc(user);
     }
 
     public String deletePost(Long postId, User user) {

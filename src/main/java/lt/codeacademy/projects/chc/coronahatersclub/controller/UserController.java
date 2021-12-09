@@ -32,13 +32,9 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String createNewUser(@ModelAttribute @Valid User user, BindingResult errors, Model model) {
-        if(errors.hasErrors()){
-            return "register";
-        } else {
-            userService.register(user);
-            return "registersuccess";
-        }
+    public String createNewUser(@ModelAttribute User user) {
+        userService.register(user);
+        return "registersuccess";
     }
 
     //    @PreAuthorize("authentication.principal.userid == #userId")
@@ -48,7 +44,7 @@ public class UserController {
         var postCount = postService.getAllUserPosts(user).size();
         model.addAttribute("postCount", postCount);
         var commentCount = commentService.getAllUserComments(user).size();
-        model.addAttribute("commentCount",commentCount);
+        model.addAttribute("commentCount", commentCount);
         return "profile";
     }
 //    @PostMapping("/user/profile")
@@ -62,7 +58,7 @@ public class UserController {
                            @RequestParam(name = "firstName", required = false) String firstName,
                            @RequestParam(name = "lastName", required = false) String lastName,
                            @RequestParam(name = "email", required = false) String email,
-                           @RequestParam(name = "birthYear", required = false)Integer birthYear,
+                           @RequestParam(name = "birthYear", required = false) Integer birthYear,
                            @RequestParam(name = "birthMonth", required = false) Integer birthMonth,
                            @RequestParam(name = "birthDay", required = false) Integer birthDay,
                            @RequestParam(name = "address", required = false) String address,
@@ -70,7 +66,7 @@ public class UserController {
                            @RequestParam(name = "phone", required = false) String phone,
                            @RequestParam(name = "title", required = false) String title,
                            @RequestParam(name = "about", required = false) String about
-                           ) {
+    ) {
         UserEditRequest edit = new UserEditRequest();
         edit.setFirstName(firstName);
         edit.setLastName(lastName);
@@ -84,7 +80,7 @@ public class UserController {
         edit.setTitle(title);
         edit.setAbout(about);
 
-        userService.editUser(edit,user);
+        userService.editUser(edit, user);
         return "redirect:/user/profile";
     }
 

@@ -31,9 +31,10 @@
             <label for="passwordInput" th:text="#{loginPasswordLabel}"></label>
             <input type="password" name="password" class="form-control" id="passwordInput" placeholder="&#xF023;" style="font-family:Arial, FontAwesome" required>
         </div>
-        <div class="m-1" th:text="#{loginNotAMember}">
-            <a th:href="@{register}" th:text="#{loginRegisterNow}"></a>
-        </div>
+        <div style="display: inline-block" class="m-1" th:text="#{loginNotAMember}"></div>
+        <a th:href="@{register}" th:text="#{loginRegisterNow}"></a>
+
+
         <button type="submit" class="btn-primary btn-block rounded-5 ripple ripple-surface" th:text="#{loginButtonLogin}"></button>
     </form>
 </div>

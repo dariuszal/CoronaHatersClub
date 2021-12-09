@@ -7,8 +7,7 @@ import lt.codeacademy.projects.chc.coronahatersclub.model.User;
 import lt.codeacademy.projects.chc.coronahatersclub.repository.UserRepository;
 import lt.codeacademy.projects.chc.coronahatersclub.requests.UserEditRequest;
 import lt.codeacademy.projects.chc.coronahatersclub.security.UserPrincipal;
-import lt.codeacademy.projects.chc.coronahatersclub.validators.UserEditRequestValidator;
-import org.springframework.security.core.Authentication;
+import lt.codeacademy.projects.chc.coronahatersclub.validators.UserActionValidator;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,7 +23,7 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final UserEditRequestValidator editValidator;
+    private final UserActionValidator actionValidator;
 
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
@@ -34,22 +33,8 @@ public class UserService implements UserDetailsService {
 
     }
 
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow();
-    }
-
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow();
-    }
-
     public String register(User user) {
-        boolean userExists = userRepository.findByEmail(user.getEmail()).isPresent() || userRepository.findByUsername(user.getUsername()).isPresent();
-        if (userExists) {
-            throw new IllegalStateException("Someone is already registered with this email or username");
-        }
-        if (user.getPassword() == null) {
-            throw new IllegalArgumentException("Password missing");
-        }
+        actionValidator.validateRegister(user);
         String encodedPassword = bCryptPasswordEncoder
                 .encode(user.getPassword());
 
@@ -71,7 +56,7 @@ public class UserService implements UserDetailsService {
         } catch (Exception e) {
             throw e;
         }
-        editValidator.validate(user,edit,newDate);
+        actionValidator.validateEdit(user,edit,newDate);
         userRepository.save(user);
     }
 }

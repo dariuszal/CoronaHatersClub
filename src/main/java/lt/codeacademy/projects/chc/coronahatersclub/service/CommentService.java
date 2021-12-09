@@ -17,13 +17,13 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CommentService {
-   private final CommentRepository commentRepository;
-   private final PostRepository postRepository;
-   private final CommentActionValidator commentActionValidator;
+    private final CommentRepository commentRepository;
+    private final PostRepository postRepository;
+    private final CommentActionValidator commentActionValidator;
 
 
     public String createNewComment(Long postId, String commentBody, User user) {
-        if(commentBody.length() < 1) {
+        if (commentBody.length() < 1) {
             throw new InvalidParameterException("Comment body cannot be empty");
         }
         Post post = postRepository.findById(postId).orElseThrow();
@@ -41,26 +41,25 @@ public class CommentService {
     public List<Comment> getAllUserComments(User user) {
         return commentRepository.findAllByUser(user);
     }
+
     public List<Comment> getAllComments() {
         return commentRepository.findAll();
     }
 
     public String deleteComment(User user, Long commentId) {
-        Comment comment = commentRepository.findById(commentId).orElseThrow(()-> new EntityNotFoundException("Comment Not Found"));
-        boolean deleteValid = commentActionValidator.deleteValidate(user,comment);
-        if(deleteValid) {
-            Post commentPost = postRepository.findById(comment.getPost().getId()).orElseThrow();
-            commentPost.getComments().remove(comment);
-            commentRepository.delete(comment);
-            return "redirect:/posts";
-        }
-        throw new RequestRejectedException("deletion unsuccessful");
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new EntityNotFoundException("Comment Not Found"));
+        commentActionValidator.deleteValidate(user, comment);
+
+        Post commentPost = postRepository.findById(comment.getPost().getId()).orElseThrow();
+        commentPost.getComments().remove(comment);
+        commentRepository.delete(comment);
+        return "redirect:/posts";
     }
 
     public String editComment(User user, Long commentId, String commentBody) {
-        Comment comment = commentRepository.findById(commentId).orElseThrow(()->new EntityNotFoundException("Comment Not Found"));
-        boolean editValid = commentActionValidator.editValidate(user,comment,commentBody);
-        if(editValid) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new EntityNotFoundException("Comment Not Found"));
+        boolean editValid = commentActionValidator.editValidate(user, comment, commentBody);
+        if (editValid) {
             comment.setBody(commentBody);
             commentRepository.save(comment);
             return "redirect:/posts";

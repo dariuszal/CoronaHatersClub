@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lt.codeacademy.projects.chc.coronahatersclub.enums.UserRole;
-import lt.codeacademy.projects.chc.coronahatersclub.validation.ValidUsername;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -25,8 +24,7 @@ public class User {
     private Long id;
 
     @Column(unique = true)
-    @NotEmpty(message = "{NotEmpty.custom}")
-    @ValidUsername
+    @NotEmpty
     private String username;
 
     @NotNull
@@ -52,7 +50,7 @@ public class User {
 
 
     @Column(length = 40)
-    private String title;
+    private String profileTitle;
 
     @Column(length =250)
     private String aboutMe;
@@ -62,7 +60,7 @@ public class User {
 
 
     private Boolean locked = false;
-    private Boolean enabled = false;
+    private Boolean enabled = true;
 
     public User(String username, String password, String email,UserRole role) {
         this.username = username;

@@ -38,14 +38,14 @@
                 <!--Populates all posts to index page-->
             </div>
 
-            <div class="text-center">
-                <a th:if="${posts.getSize()>3}" class="btn-lg btn-warning" th:text="#{seeMore}" th:href="@{/posts}"></a>
+            <div th:if="${posts.totalElements >= 3}" class="text-center">
+                <a class="btn-lg btn-warning" th:text="#{seeMore}" th:href="@{/posts}"></a>
             </div>
 
         </div>
 
-        <div th:if="${posts.getSize() != 0}" class="col-md-3 col-example">
-            <a class="btn btn-primary text-center fs-2 fw-bold rounded-5" th:text="#{newPost}" th:href="@{/posts/new}" style="width: 70%;height: 70px"></a>
+        <div class="col-md-3 col-example">
+            <a sec:authorize="isAuthenticated()" class="btn btn-primary text-center fs-2 fw-bold rounded-5" th:text="#{newPost}" th:href="@{/posts/new}" style="width: 70%;height: 70px"></a>
         </div>
     </div>
 </section>
