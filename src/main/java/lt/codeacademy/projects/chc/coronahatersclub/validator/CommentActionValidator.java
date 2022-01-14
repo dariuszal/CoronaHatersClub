@@ -1,8 +1,8 @@
-package lt.codeacademy.projects.chc.coronahatersclub.validators;
+package lt.codeacademy.projects.chc.coronahatersclub.validator;
 
 import lt.codeacademy.projects.chc.coronahatersclub.enums.UserRole;
-import lt.codeacademy.projects.chc.coronahatersclub.model.Comment;
-import lt.codeacademy.projects.chc.coronahatersclub.model.User;
+import lt.codeacademy.projects.chc.coronahatersclub.entity.Comment;
+import lt.codeacademy.projects.chc.coronahatersclub.entity.User;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 

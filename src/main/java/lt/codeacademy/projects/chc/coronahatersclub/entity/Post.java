@@ -1,4 +1,4 @@
-package lt.codeacademy.projects.chc.coronahatersclub.model;
+package lt.codeacademy.projects.chc.coronahatersclub.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

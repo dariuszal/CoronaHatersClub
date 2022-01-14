@@ -1,16 +1,12 @@
 package lt.codeacademy.projects.chc.coronahatersclub.controller;
 
 import lombok.RequiredArgsConstructor;
-import lt.codeacademy.projects.chc.coronahatersclub.model.User;
+import lt.codeacademy.projects.chc.coronahatersclub.entity.User;
 import lt.codeacademy.projects.chc.coronahatersclub.repository.UserRepository;
 import org.apache.commons.io.FilenameUtils;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -30,6 +26,7 @@ public class UploadController {
     private final String UPLOAD_DIR = "src/main/resources/static/uploads/images/profile/";
     private final String PROFILE_IMG_URL = "/uploads/images/profile/";
 
+    @CrossOrigin
     @PostMapping("/upload")
     public String uploadFile(@ModelAttribute(name = "loggedUser") User user, @RequestParam("file") MultipartFile file, RedirectAttributes attributes) {
         var username = user.getUsername();

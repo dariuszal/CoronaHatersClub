@@ -1,7 +1,7 @@
 package lt.codeacademy.projects.chc.coronahatersclub.repository;
 
-import lt.codeacademy.projects.chc.coronahatersclub.model.Post;
-import lt.codeacademy.projects.chc.coronahatersclub.model.User;
+import lt.codeacademy.projects.chc.coronahatersclub.entity.Post;
+import lt.codeacademy.projects.chc.coronahatersclub.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

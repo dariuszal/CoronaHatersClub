@@ -2,18 +2,14 @@ package lt.codeacademy.projects.chc.coronahatersclub.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lt.codeacademy.projects.chc.coronahatersclub.model.User;
-import lt.codeacademy.projects.chc.coronahatersclub.requests.UserEditRequest;
+import lt.codeacademy.projects.chc.coronahatersclub.entity.User;
+import lt.codeacademy.projects.chc.coronahatersclub.dto.UserEditRequest;
 import lt.codeacademy.projects.chc.coronahatersclub.service.CommentService;
 import lt.codeacademy.projects.chc.coronahatersclub.service.PostService;
 import lt.codeacademy.projects.chc.coronahatersclub.service.UserService;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @Slf4j
 @RequiredArgsConstructor

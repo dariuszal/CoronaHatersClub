@@ -1,9 +1,9 @@
 package lt.codeacademy.projects.chc.coronahatersclub.controller;
 
 import lombok.RequiredArgsConstructor;
-import lt.codeacademy.projects.chc.coronahatersclub.model.Post;
-import lt.codeacademy.projects.chc.coronahatersclub.model.User;
-import lt.codeacademy.projects.chc.coronahatersclub.requests.PostIdRequest;
+import lt.codeacademy.projects.chc.coronahatersclub.entity.Post;
+import lt.codeacademy.projects.chc.coronahatersclub.entity.User;
+import lt.codeacademy.projects.chc.coronahatersclub.dto.PostIdRequest;
 import lt.codeacademy.projects.chc.coronahatersclub.service.CommentService;
 import lt.codeacademy.projects.chc.coronahatersclub.service.PostService;
 import org.springframework.security.access.annotation.Secured;

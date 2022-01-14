@@ -1,4 +1,4 @@
-package lt.codeacademy.projects.chc.coronahatersclub.requests;
+package lt.codeacademy.projects.chc.coronahatersclub.dto;
 
 import lombok.Data;
 

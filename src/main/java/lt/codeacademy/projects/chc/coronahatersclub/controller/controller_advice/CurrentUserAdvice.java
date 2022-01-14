@@ -1,7 +1,7 @@
 package lt.codeacademy.projects.chc.coronahatersclub.controller.controller_advice;
 
 import lombok.RequiredArgsConstructor;
-import lt.codeacademy.projects.chc.coronahatersclub.model.User;
+import lt.codeacademy.projects.chc.coronahatersclub.entity.User;
 import lt.codeacademy.projects.chc.coronahatersclub.repository.UserRepository;
 import lt.codeacademy.projects.chc.coronahatersclub.security.UserPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;

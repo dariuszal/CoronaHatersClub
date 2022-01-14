@@ -1,11 +1,10 @@
 package lt.codeacademy.projects.chc.coronahatersclub.service;
 
 import lombok.RequiredArgsConstructor;
-import lt.codeacademy.projects.chc.coronahatersclub.model.Post;
-import lt.codeacademy.projects.chc.coronahatersclub.model.User;
+import lt.codeacademy.projects.chc.coronahatersclub.entity.Post;
+import lt.codeacademy.projects.chc.coronahatersclub.entity.User;
 import lt.codeacademy.projects.chc.coronahatersclub.repository.PostRepository;
-import lt.codeacademy.projects.chc.coronahatersclub.repository.UserRepository;
-import lt.codeacademy.projects.chc.coronahatersclub.validators.PostActionValidator;
+import lt.codeacademy.projects.chc.coronahatersclub.validator.PostActionValidator;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;

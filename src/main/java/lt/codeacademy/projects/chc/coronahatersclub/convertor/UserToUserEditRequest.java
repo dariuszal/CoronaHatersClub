@@ -1,7 +1,7 @@
-package lt.codeacademy.projects.chc.coronahatersclub.convertors;
+package lt.codeacademy.projects.chc.coronahatersclub.convertor;
 
-import lt.codeacademy.projects.chc.coronahatersclub.model.User;
-import lt.codeacademy.projects.chc.coronahatersclub.requests.UserEditRequest;
+import lt.codeacademy.projects.chc.coronahatersclub.entity.User;
+import lt.codeacademy.projects.chc.coronahatersclub.dto.UserEditRequest;
 import org.springframework.stereotype.Service;
 
 @Service

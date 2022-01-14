@@ -1,9 +1,9 @@
 package lt.codeacademy.projects.chc.coronahatersclub.controller;
 
 import lombok.RequiredArgsConstructor;
-import lt.codeacademy.projects.chc.coronahatersclub.convertors.UserToUserEditRequest;
-import lt.codeacademy.projects.chc.coronahatersclub.model.User;
-import lt.codeacademy.projects.chc.coronahatersclub.requests.PostIdRequest;
+import lt.codeacademy.projects.chc.coronahatersclub.convertor.UserToUserEditRequest;
+import lt.codeacademy.projects.chc.coronahatersclub.entity.User;
+import lt.codeacademy.projects.chc.coronahatersclub.dto.PostIdRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

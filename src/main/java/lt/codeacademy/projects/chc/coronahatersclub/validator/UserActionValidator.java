@@ -1,9 +1,9 @@
-package lt.codeacademy.projects.chc.coronahatersclub.validators;
+package lt.codeacademy.projects.chc.coronahatersclub.validator;
 
 import lombok.RequiredArgsConstructor;
-import lt.codeacademy.projects.chc.coronahatersclub.model.User;
+import lt.codeacademy.projects.chc.coronahatersclub.entity.User;
 import lt.codeacademy.projects.chc.coronahatersclub.repository.UserRepository;
-import lt.codeacademy.projects.chc.coronahatersclub.requests.UserEditRequest;
+import lt.codeacademy.projects.chc.coronahatersclub.dto.UserEditRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
